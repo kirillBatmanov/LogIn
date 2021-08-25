@@ -9,10 +9,21 @@ import UIKit
 
 class LogInViewController: UIViewController {
 
-
     @IBOutlet var userNameTF: UITextField!
     @IBOutlet var passwordTF: UITextField!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let segue = segue.destination as? WelcomeViewController else {return}
+        segue.userName = userNameTF.text
+    }
     
     @IBAction func showUserName(_ sender: Any) {
         let alert = UIAlertController(
@@ -40,7 +51,6 @@ class LogInViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    
     @IBAction func loginButtonPressed(_ sender: Any) {
         if userNameTF.text == "Alexey" && passwordTF.text == "123" {
             performSegue(withIdentifier: "correctNameAndPassword", sender: nil)
@@ -60,22 +70,10 @@ class LogInViewController: UIViewController {
         }
     }
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let segue = segue.destination as? WelcomeViewController else {return}
-        segue.userName = userNameTF.text
-    }
-    
     @IBAction func unwind(for segue: UIStoryboardSegue) {
         dismiss(animated: true)
         userNameTF.text = ""
         passwordTF.text = ""
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-    
-    
 }
 
