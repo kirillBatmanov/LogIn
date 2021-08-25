@@ -23,7 +23,4 @@ class WelcomeViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         avatarUserImage.layer.cornerRadius = avatarUserImage.frame.width / 2
     }
-    
-    
-    
 }
